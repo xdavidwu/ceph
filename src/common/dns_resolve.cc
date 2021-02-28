@@ -206,8 +206,13 @@ int DNSResolver::resolve_ip_addr(CephContext *cct, const string& hostname,
 
 }
 
+#ifdef HAVE_RES_NQUERY
 int DNSResolver::resolve_ip_addr(CephContext *cct, res_state *res, const string& hostname, 
     entity_addr_t *addr) {
+#else
+int DNSResolver::resolve_ip_addr(CephContext *cct, void *res, const string& hostname, 
+    entity_addr_t *addr) {
+#endif
 
   u_char nsbuf[NS_PACKETSZ];
   int len;

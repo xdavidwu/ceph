@@ -61,7 +61,7 @@ int get_device_by_path(const char *path, char* partition, char* device,
 
 #include "common/blkdev.h"
 
-#ifdef __linux__
+#if defined(__linux__) && !defined(__ANDROID__)
 #include <libudev.h>
 #include <linux/fs.h>
 #include <linux/kdev_t.h>
@@ -104,7 +104,7 @@ int BlkDev::get_devid(dev_t *id) const
   return 0;
 }
 
-#ifdef __linux__
+#if defined(__linux__) && !defined(__ANDROID__)
 
 const char *BlkDev::sysfsdir() const {
   return "/sys";
@@ -1168,12 +1168,12 @@ bool BlkDev::support_discard() const
   return false;
 }
 
-int BlkDev::discard(int fd, int64_t offset, int64_t len) const
+int BlkDev::discard(int64_t offset, int64_t len) const
 {
   return -EOPNOTSUPP;
 }
 
-bool BlkDev::is_rotational(const char *devname) const
+bool BlkDev::is_rotational() const
 {
   return false;
 }

@@ -40,6 +40,10 @@
 #include <linux/falloc.h>
 #endif
 
+#ifdef __ANDROID__
+#define IFTODT(x) ((x) >> 12 & 017)
+#endif
+
 #include <sys/statvfs.h>
 
 #include "common/config.h"

@@ -261,7 +261,7 @@ if(WITH_LEVELDB)
   find_file(HAVE_LEVELDB_FILTER_POLICY leveldb/filter_policy.h PATHS ${LEVELDB_INCLUDE_DIR})
 endif(WITH_LEVELDB)
 
-find_package(snappy REQUIRED)
+#find_package(snappy REQUIRED)
 
 option(WITH_BROTLI "Brotli compression support" OFF)
 if(WITH_BROTLI)
@@ -320,10 +320,10 @@ if (HAVE_LIBTCMALLOC AND TCMALLOC_VERSION_STRING VERSION_LESS 2.6.2)
   set(LIBTCMALLOC_MISSING_ALIGNED_ALLOC ON)
 endif()
 
-find_package(CURL REQUIRED)
-set(CMAKE_REQUIRED_INCLUDES ${CURL_INCLUDE_DIRS})
-set(CMAKE_REQUIRED_LIBRARIES ${CURL_LIBRARIES})
-CHECK_SYMBOL_EXISTS(curl_multi_wait curl/curl.h HAVE_CURL_MULTI_WAIT)
+#find_package(CURL REQUIRED)
+#set(CMAKE_REQUIRED_INCLUDES ${CURL_INCLUDE_DIRS})
+#set(CMAKE_REQUIRED_LIBRARIES ${CURL_LIBRARIES})
+#CHECK_SYMBOL_EXISTS(curl_multi_wait curl/curl.h HAVE_CURL_MULTI_WAIT)
 
 find_package(OpenSSL REQUIRED)
 set(CRYPTO_LIBS OpenSSL::Crypto)
@@ -430,8 +430,8 @@ elseif(WITH_PYTHON3 MATCHES "^(1|ON|YES|TRUE|Y)$")
 elseif(NOT WITH_PYTHON3 STREQUAL "3")
   set(find_python3_exact "EXACT")
 endif()
-find_package(Python3 ${WITH_PYTHON3} ${find_python3_exact} REQUIRED
-  COMPONENTS Interpreter Development)
+#find_package(Python3 ${WITH_PYTHON3} ${find_python3_exact} REQUIRED
+#  COMPONENTS Interpreter Development)
 unset(find_python3_exact)
 
 option(WITH_MGR "ceph-mgr is enabled" ON)

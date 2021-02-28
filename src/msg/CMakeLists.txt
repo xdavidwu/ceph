@@ -20,13 +20,13 @@ list(APPEND msg_srcs
   async/frames_v2.cc
   async/net_handler.cc)
 
-if(LINUX)
+if(LINUX OR ANDROID)
   list(APPEND msg_srcs
     async/EventEpoll.cc)
 elseif(FREEBSD OR APPLE)
   list(APPEND msg_srcs
     async/EventKqueue.cc)
-endif(LINUX)
+endif(LINUX OR ANDROID)
 
 if(HAVE_RDMA)
   list(APPEND msg_srcs

@@ -10,7 +10,7 @@ add_library(compressor_objs OBJECT ${compressor_srcs})
 
 set(compressor_plugin_dir ${CEPH_INSTALL_PKGLIBDIR}/compressor)
 
-add_subdirectory(snappy)
+#add_subdirectory(snappy)
 add_subdirectory(zlib)
 add_subdirectory(zstd)
 
@@ -23,7 +23,7 @@ if(HAVE_BROTLI)
 endif()
 
 set(ceph_compressor_libs
-    ceph_snappy
+	#ceph_snappy
     ceph_zlib
     ceph_zstd)
 

@@ -20,6 +20,10 @@
 #include <set>
 #include <string_view>
 
+#ifdef __ANDROID__
+#define IFTODT(x) ((x) >> 12 & 017)
+#endif
+
 #include "common/config.h"
 #include "include/counter.h"
 #include "include/elist.h"

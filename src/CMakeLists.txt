@@ -504,7 +504,7 @@ if(NOT CEPH_BUILD_VIRTUALENV)
   set(CEPH_BUILD_VIRTUALENV ${CMAKE_BINARY_DIR})
 endif()
 
-add_subdirectory(pybind)
+#add_subdirectory(pybind)
 add_subdirectory(ceph-volume)
 add_subdirectory(python-common)
 add_subdirectory(cephadm)
