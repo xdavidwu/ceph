@@ -4,7 +4,7 @@ set(_std_filesystem_test_src
 macro(try_std_filesystem_library _library _result _already_included)
   set(_std_filesystem_try_compile_arg
     CXX_STANDARD 17)
-  if(NOT _library STREQUAL "")
+  if(NOT ${_library} STREQUAL "")
     list(APPEND _std_filesystem_try_compile_arg
       LINK_LIBRARIES ${_library})
   endif()
@@ -14,7 +14,7 @@ macro(try_std_filesystem_library _library _result _already_included)
     ${_std_filesystem_try_compile_arg})
   unset(_std_filesystem_try_compile_arg)
   if(_std_filesystem_compiles)
-    if(NOT _library STREQUAL "")
+    if(NOT ${_library} STREQUAL "")
       set(${_result} ${_library})
     else()
       set(${_already_included} "included by standard library")
