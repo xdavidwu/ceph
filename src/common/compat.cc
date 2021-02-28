@@ -237,8 +237,10 @@ int ceph_memzero_s(void *dest, size_t destsz, size_t count) {
     return memset_s(dest, destsz, 0, count);
 #elif defined(_WIN32)
     SecureZeroMemory(dest, count);
-#else
+#elif defined(__FreeBSD__)
     explicit_bzero(dest, count);
+#else
+    memset(dest, 0, count);
 #endif
     return 0;
 }

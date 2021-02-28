@@ -560,7 +560,7 @@ endif(${WITH_LTTNG})
 
 add_subdirectory(global)
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT ANDROID)
   find_package(Lua 5.3 REQUIRED)
 endif()
 
@@ -600,7 +600,7 @@ if(NOT CEPH_BUILD_VIRTUALENV)
   set(CEPH_BUILD_VIRTUALENV ${CMAKE_BINARY_DIR})
 endif()
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT ANDROID)
 add_subdirectory(pybind)
 add_subdirectory(ceph-volume)
 add_subdirectory(python-common)
@@ -636,7 +636,7 @@ endif()
 add_subdirectory(kv)
 add_subdirectory(os)
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT ANDROID)
 add_subdirectory(blk)
 add_subdirectory(osd)
 
