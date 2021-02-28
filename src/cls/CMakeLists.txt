@@ -231,7 +231,7 @@ if (WITH_CEPHFS)
 
 endif (WITH_CEPHFS)
 
-if (NOT WIN32)
+if (NOT WIN32 AND NOT ANDROID)
   # cls_lua
   set(cls_lua_srcs
       lua/cls_lua.cc
