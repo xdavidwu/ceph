@@ -46,6 +46,10 @@
 
 #include <sys/statvfs.h>
 
+#ifdef __ANDROID__
+#define IFTODT(x) ((x) >> 12 & 017)
+#endif
+
 #include "common/config.h"
 #include "common/version.h"
 #include "common/async/blocked_completion.h"
