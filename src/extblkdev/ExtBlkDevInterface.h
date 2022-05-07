@@ -1,4 +1,4 @@
-// -*- mode:C++; tab-width:8; c-basic-offset:2; indent-tabs-mode:t -*- 
+// -*- mode:C++; tab-width:8; c-basic-offset:2; indent-tabs-mode:t -*-
 // vim: ts=8 sw=2 smarttab
 /*
  * Ceph distributed storage system
@@ -14,7 +14,7 @@
  *  modify it under the terms of the GNU Lesser General Public
  *  License as published by the Free Software Foundation; either
  *  version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  */
 
 #ifndef CEPH_EXT_BLK_DEV_INTERFACE_H
@@ -25,16 +25,16 @@
 
     Block devices with verdor specific capabilities rely on plugins implementing
     **ExtBlkDevInterface** to provide access to their capabilities.
-    
+
     Methods returning an **int** return **0** on success and a
     negative value on error.
- */ 
+ */
 
 #include <string>
 #include <map>
 #include <ostream>
 #include <memory>
-#ifdef __linux__
+#if defined(__linux__) && !defined(__ANDROID__)
 #include <sys/capability.h>
 #else
 typedef void *cap_t;
@@ -111,7 +111,7 @@ namespace ceph {
 
     /**
      * Indicate plugin-required capabilities in permitted set
-     * If a plugin requires a capability to be active in the 
+     * If a plugin requires a capability to be active in the
      * permitted set when invoked, it must indicate so by setting
      * the required flags in the cap_t structure passed into this method.
      * The cap_t structure is empty when passed into the method, and only the

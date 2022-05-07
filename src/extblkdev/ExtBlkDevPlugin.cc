@@ -1,4 +1,4 @@
-// -*- mode:C++; tab-width:8; c-basic-offset:2; indent-tabs-mode:t -*- 
+// -*- mode:C++; tab-width:8; c-basic-offset:2; indent-tabs-mode:t -*-
 // vim: ts=8 sw=2 smarttab
 /*
  * Ceph distributed storage system
@@ -16,7 +16,7 @@
  *  modify it under the terms of the GNU Lesser General Public
  *  License as published by the Free Software Foundation; either
  *  version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  */
 
 #include <errno.h>
@@ -40,7 +40,7 @@ namespace ceph {
   namespace extblkdev {
 
 
-#ifdef __linux__
+#if defined(__linux__) && !defined(__ANDROID__)
     // iterate across plugins and determine each capability's reqirement
     // merge requirements into merge_caps set
     int get_required_caps(CephContext *cct, cap_t &merge_caps)
@@ -108,7 +108,7 @@ namespace ceph {
       });
       bool changed = false;
       // get process capability set
-      proc_caps = cap_get_proc(); 
+      proc_caps = cap_get_proc();
       if (proc_caps == nullptr) {
 	dout(1) << " cap_get_proc failed with errno: " << errno << dendl;
 	return -errno;
@@ -204,7 +204,7 @@ namespace ceph {
 	  }
 	}
       }
-#ifdef __linux__
+#if defined(__linux__) && !defined(__ANDROID__)
       // if we are still running as root, we do not need to trim capabilities
       // as we are intended to use the privileges
       if (geteuid() == 0) {
@@ -233,7 +233,7 @@ namespace ceph {
 
       for (auto& it : ptype->second) {
 
-	dout(10) << __func__ << " Trying to detect block device " << logdevname 
+	dout(10) << __func__ << " Trying to detect block device " << logdevname
 		      << " using plugin " << it.first << dendl;
 	auto ebdplugin = dynamic_cast<ExtBlkDevPlugin*>(it.second);
 	if (ebdplugin == nullptr) {

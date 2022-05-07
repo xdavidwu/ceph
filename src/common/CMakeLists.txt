@@ -147,7 +147,7 @@ if(WIN32)
     win32/syslog.cc)
 else()
   list(APPEND common_srcs
-    blkdev.cc
+	  #blkdev.cc
     dns_resolve.cc
     linux_version.c
     SubProcess.cc)
