@@ -17,7 +17,7 @@ endif()
 
 set(compressor_plugin_dir ${CEPH_INSTALL_PKGLIBDIR}/compressor)
 
-add_subdirectory(snappy)
+#add_subdirectory(snappy)
 add_subdirectory(zlib)
 add_subdirectory(zstd)
 
