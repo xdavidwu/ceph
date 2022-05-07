@@ -306,7 +306,7 @@ if(LINUX)
   endif()
 endif()
 
-find_package(snappy REQUIRED)
+#find_package(snappy REQUIRED)
 
 option(WITH_BROTLI "Brotli compression support" OFF)
 if(WITH_BROTLI)
@@ -363,10 +363,10 @@ else()
   set(EXE_LINKER_USE_PIE ${ENABLE_SHARED})
 endif()
 
-find_package(CURL REQUIRED)
-set(CMAKE_REQUIRED_INCLUDES ${CURL_INCLUDE_DIRS})
-set(CMAKE_REQUIRED_LIBRARIES ${CURL_LIBRARIES})
-CHECK_SYMBOL_EXISTS(curl_multi_wait curl/curl.h HAVE_CURL_MULTI_WAIT)
+#find_package(CURL REQUIRED)
+#set(CMAKE_REQUIRED_INCLUDES ${CURL_INCLUDE_DIRS})
+#set(CMAKE_REQUIRED_LIBRARIES ${CURL_LIBRARIES})
+#CHECK_SYMBOL_EXISTS(curl_multi_wait curl/curl.h HAVE_CURL_MULTI_WAIT)
 
 find_package(OpenSSL REQUIRED)
 set(CRYPTO_LIBS OpenSSL::Crypto)
@@ -461,7 +461,7 @@ endif (WITH_RADOSGW)
 #option for CephFS
 option(WITH_CEPHFS "CephFS is enabled" ON)
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT ANDROID)
 # Please specify 3.[0-7] if you want to build with a certain version of python3.
 set(WITH_PYTHON3 "3" CACHE STRING "build with specified python3 version")
 if(NOT WITH_PYTHON3 STREQUAL "3")
@@ -479,7 +479,7 @@ if(WITH_MGR)
   set(MGR_PYTHON_VERSION_MINOR ${Python3_VERSION_MINOR})
   # Boost dependency check deferred to Boost section
 endif(WITH_MGR)
-endif(NOT WIN32)
+endif(NOT WIN32 AND NOT ANDROID)
 
 option(WITH_THREAD_SAFE_RES_QUERY "res_query is thread safe" OFF)
 if(WITH_THREAD_SAFE_RES_QUERY)
@@ -586,7 +586,7 @@ option(WITH_SYSTEM_BOOST "require and build with system Boost" OFF)
 # Boost::thread depends on Boost::atomic, so list it explicitly.
 set(BOOST_COMPONENTS
   atomic chrono thread system regex random program_options date_time
-  iostreams context coroutine)
+  iostreams context)
 set(BOOST_HEADER_COMPONENTS container)
 
 if(WITH_MGR)

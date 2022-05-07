@@ -1,5 +1,5 @@
 find_package(Java COMPONENTS Development REQUIRED)
-find_package(JNI REQUIRED)
+#find_package(JNI REQUIRED)
 include(UseJava)
 
 set(java_srcs
@@ -58,4 +58,4 @@ add_subdirectory(native)
 
 add_custom_target(java DEPENDS
   libcephfs.jar
-  libcephfs_jni)
+  cephfs_jni)

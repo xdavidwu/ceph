@@ -467,7 +467,7 @@ set(ceph_common_deps
   StdFilesystem::filesystem
   fmt::fmt
   ${BLKID_LIBRARIES}
-  ${Backtrace_LIBRARIES}
+  #${Backtrace_LIBRARIES}
   ${BLKIN_LIBRARIES}
   ${CRYPTO_LIBS}
   ${GSSAPI_LIBRARIES}
@@ -617,12 +617,12 @@ if(NOT CEPH_BUILD_VIRTUALENV)
   set(CEPH_BUILD_VIRTUALENV ${CMAKE_BINARY_DIR})
 endif()
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT ANDROID)
 add_subdirectory(pybind)
 add_subdirectory(ceph-volume)
 add_subdirectory(python-common)
 add_subdirectory(cephadm)
-endif(NOT WIN32)
+endif(NOT WIN32 AND NOT ANDROID)
 
 # Monitor
 add_subdirectory(mon)
@@ -898,7 +898,7 @@ add_custom_target(vstart-base DEPENDS
     monmaptool
     crushtool
     rados)
-if(NOT WIN32)
+if(NOT WIN32 AND NOT ANDROID)
   # WIN32 port does not build python bindings
   # TODO: introduce an option for enabling python binding
   add_dependencies(vstart-base
