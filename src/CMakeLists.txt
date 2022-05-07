@@ -491,7 +491,7 @@ set(ceph_common_deps
   StdFilesystem::filesystem
   ${FMT_LIB}
   ${BLKID_LIBRARIES}
-  ${Backtrace_LIBRARIES}
+  #${Backtrace_LIBRARIES}
   ${BLKIN_LIBRARIES}
   ${CRYPTO_LIBS}
   ${GSSAPI_LIBRARIES}
@@ -664,13 +664,13 @@ if(NOT CEPH_BUILD_VIRTUALENV)
   set(CEPH_BUILD_VIRTUALENV ${CMAKE_BINARY_DIR})
 endif()
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT ANDROID)
 add_subdirectory(pybind)
 add_subdirectory(ceph-volume)
 add_subdirectory(ceph-node-proxy)
 add_subdirectory(python-common)
 add_subdirectory(cephadm)
-endif(NOT WIN32)
+endif(NOT WIN32 AND NOT ANDROID)
 
 # Monitor
 add_subdirectory(mon)

@@ -372,13 +372,13 @@ if(WITH_KRBD AND NOT WITH_RBD)
 endif()
 if(LINUX)
   if(WITH_LIBCEPHFS OR WITH_KRBD)
-    # keyutils is only used when talking to the Linux Kernel key store 
+    # keyutils is only used when talking to the Linux Kernel key store
     find_package(keyutils REQUIRED)
     set(HAVE_KEYUTILS ${KEYUTILS_FOUND})
   endif()
 endif()
 
-find_package(snappy REQUIRED)
+#find_package(snappy REQUIRED)
 
 option(WITH_BROTLI "Brotli compression support" OFF)
 if(WITH_BROTLI)
@@ -447,7 +447,7 @@ else()
   set(EXE_LINKER_USE_PIE ${ENABLE_SHARED})
 endif()
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT ANDROID)
   # require libcurl with good curl_multi_wait(), see https://tracker.ceph.com/issues/15915
   find_package(CURL 7.32 REQUIRED)
 endif()
@@ -551,7 +551,7 @@ endif (WITH_RADOSGW)
 #option for CephFS
 option(WITH_CEPHFS "CephFS is enabled" ON)
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT ANDROID)
 # Please specify 3.[0-7] if you want to build with a certain version of python3.
 set(WITH_PYTHON3 "3" CACHE STRING "build with specified python3 version")
 find_package(Python3 ${WITH_PYTHON3} EXACT REQUIRED
@@ -565,7 +565,7 @@ if(WITH_MGR)
   set(MGR_PYTHON_VERSION_MINOR ${Python3_VERSION_MINOR})
   # Boost dependency check deferred to Boost section
 endif(WITH_MGR)
-endif(NOT WIN32)
+endif(NOT WIN32 AND NOT ANDROID)
 
 option(WITH_THREAD_SAFE_RES_QUERY "res_query is thread safe" OFF)
 if(WITH_THREAD_SAFE_RES_QUERY)
@@ -672,7 +672,7 @@ option(WITH_SYSTEM_BOOST "require and build with system Boost" OFF)
 # Boost::thread depends on Boost::atomic, so list it explicitly.
 set(BOOST_COMPONENTS
   atomic chrono thread system regex random program_options date_time
-  iostreams context coroutine)
+  iostreams context)
 set(BOOST_HEADER_COMPONENTS container)
 
 if(WITH_MGR)

@@ -40,7 +40,7 @@
 #cmakedefine HAVE_SYS_VFS_H 1
 
 /* Define to 1 if you have the <execinfo.h> header file. */
-#cmakedefine HAVE_EXECINFO_H 1
+//#cmakedefine HAVE_EXECINFO_H 1
 
 /* Define to 1 if the system has the type `__s16'. */
 #cmakedefine HAVE___S16 1

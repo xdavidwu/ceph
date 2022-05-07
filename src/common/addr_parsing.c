@@ -18,6 +18,8 @@
 #if defined(__FreeBSD__) || defined(_AIX)
 #include <sys/socket.h>
 #include <netinet/in.h>
+#elif defined(__ANDROID__)
+#include <linux/in.h>
 #endif
 #include <netdb.h>
 
