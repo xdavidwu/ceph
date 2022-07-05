@@ -27,6 +27,10 @@
 
 #include <fmt/format.h>
 
+#ifdef __ANDROID__
+#include <android/log.h>
+#endif
+
 #define MAX_LOG_BUF 65536
 
 namespace ceph {
@@ -289,7 +293,7 @@ void Log::_flush(EntryVector& t, bool crash)
     bool do_graylog2 = m_graylog_crash >= prio && should_log;
     bool do_journald = m_journald_crash >= prio && should_log;
 
-    if (do_fd || do_syslog || do_stderr) {
+    if (do_fd || do_syslog || do_stderr || should_log) {
       const std::size_t cur = m_log_buf.size();
       std::size_t used = 0;
       const std::size_t allocated = e.size() + 80;
@@ -311,6 +315,10 @@ void Log::_flush(EntryVector& t, bool crash)
       if (do_syslog) {
         syslog(LOG_USER|LOG_INFO, "%s", pos);
       }
+
+#ifdef __ANDROID__
+      __android_log_write(ANDROID_LOG_DEBUG, "ceph", pos);
+#endif
 
       if (do_stderr) {
         std::cerr << m_log_stderr_prefix << std::string_view(pos, used) << std::endl;
