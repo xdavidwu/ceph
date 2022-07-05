@@ -513,6 +513,11 @@ if(WIN32)
   list(APPEND ceph_common_deps dlfcn_win32)
 endif()
 
+if(ANDROID)
+  find_library(log_lib log)
+  list(APPEND ceph_common_deps ${log_lib})
+endif()
+
 if(WITH_BLUESTORE_PMEM OR WITH_RBD_RWL)
   if(WITH_SYSTEM_PMDK)
     set(pmdk_COMPONENTS)
