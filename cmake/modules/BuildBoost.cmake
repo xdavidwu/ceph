@@ -112,7 +112,7 @@ function(do_build_boost root_dir version)
     "using ${toolset}"
     " : "
     " : ${CMAKE_CXX_COMPILER}"
-    " : <compileflags>-fPIC <compileflags>-w <compileflags>-Wno-everything"
+    " : <compileflags>-fPIC <compileflags>-w <compileflags>-Wno-everything <compileflags>--target=${CMAKE_CXX_COMPILER_TARGET} <linkflags>--target=${CMAKE_CXX_COMPILER_TARGET}"
     " ;\n")
   if(with_python_version)
     find_package(Python3 ${with_python_version} QUIET REQUIRED
@@ -136,6 +136,13 @@ function(do_build_boost root_dir version)
     list(APPEND b2 abi=aapcs)
     list(APPEND b2 architecture=arm)
     list(APPEND b2 binary-format=elf)
+  elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+    list(APPEND b2 abi=aapcs)
+    list(APPEND b2 architecture=arm)
+    list(APPEND b2 binary-format=elf)
+  endif()
+  if(ANDROID)
+    list(APPEND b2 target-os=android)
   endif()
   if(WITH_BOOST_VALGRIND)
     list(APPEND b2 valgrind=on)
