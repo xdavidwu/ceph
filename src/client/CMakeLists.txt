@@ -15,4 +15,5 @@ target_link_libraries(client
   Boost::locale
   ICU::uc
   ICU::i18n
+  ICU::data
   )
